@@ -3,7 +3,8 @@
  * This class simulates a car driver in a simple Uber-like app.
  * 
  * @author Matthew Moga
- * @version April 12, 2024 
+ * @version April 12, 2024
+ *
  */
 public class Driver {
   private String id;
