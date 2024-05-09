@@ -174,9 +174,11 @@ public class TMUberSystemManager {
   }
 
 
-  
-  // Go through all drivers and see if one is available
-  // Choose the first available driver
+  /**
+   * This accessor goes through all drivers and sees if one is available.
+   * 
+   * @return Driver - Chooses the first available driver
+   */
   private Driver getAvailableDriver() {
     for (int i = 0; i < drivers.size(); i++) {
       Driver driver = drivers.get(i);
@@ -187,11 +189,12 @@ public class TMUberSystemManager {
   }
 
 
-  // Print Information (printInfo()) about all registered users in the system
+  /**
+   * Mutator method that prints information about all registered users in the system.
+   */
   public void listAllUsers() {
     System.out.println();
     int count = 0;
-
     for (String userId: users.keySet()) {
       int index = count + 1;
       System.out.printf("%-2s. ", index);
@@ -202,10 +205,11 @@ public class TMUberSystemManager {
   }
 
 
-  // Print Information (printInfo()) about all registered drivers in the system
+  /**
+   * Mutator method that prints info about all registered drivers in the system.
+   */
   public void listAllDrivers() {
     System.out.println();
-
     for (int i = 0; i < drivers.size(); i++) {
       int index = i + 1;
       System.out.printf("%-2s. ", index);
@@ -215,7 +219,9 @@ public class TMUberSystemManager {
   }
 
 
-  // Print Information (printInfo()) about all current service requests depending on zone number
+  /**
+   * Mutator method that prints info about all current service requests depending on zone number.
+   */
   public void listAllServiceRequests() {
     // Loop through the zones and find all service requests in given zone
     for (int zone = 0; zone < serviceRequests.length; zone++) {
@@ -238,7 +244,13 @@ public class TMUberSystemManager {
   }
 
 
-  // Add a new user to the system
+  /**
+   * Mutator method that adds a new user to the system.
+   * 
+   * @param name (String)
+   * @param address (String)
+   * @param wallet (double)
+   */
   public void registerNewUser(String name, String address, double wallet) {
     // Check to ensure name is valid
     if (name == null || name.equals("")) {
@@ -261,7 +273,14 @@ public class TMUberSystemManager {
   }
 
 
-  // Add a new driver to the system
+  /**
+   * Mutator method that adds a new driver to the system.
+   * 
+   * @param name (String)
+   * @param carModel (String)
+   * @param carLicencePlate (String)
+   * @param address (String)
+   */
   public void registerNewDriver(String name, String carModel, String carLicencePlate, String address) {
     // Check to ensure name is valid
     if (name == null || name.equals("")) {
@@ -290,7 +309,14 @@ public class TMUberSystemManager {
   }
 
 
-  // Request a ride. User wallet will be reduced when drop off happens
+  /**
+   * Mutator method that requests a ride.
+   * User wallet will be reduced when drop off happens.
+   * 
+   * @param accountId (String)
+   * @param from (String)
+   * @param to (String)
+   */
   public void requestRide(String accountId, String from, String to) {
     // Check valid user account
     User user = getUser(accountId);
@@ -334,7 +360,16 @@ public class TMUberSystemManager {
   }
 
 
-  // Request a food delivery. User wallet will be reduced when drop off happens
+  /**
+   * Mutator method that requests a food delivery.
+   * User wallet will be reduced when drop off happens.
+   * 
+   * @param accountId (String)
+   * @param from (String)
+   * @param to (String)
+   * @param restaurant (String)
+   * @param foodOrderId (String)
+   */
   public void requestDelivery(String accountId, String from, String to, String restaurant, String foodOrderId) {
     // Check for valid user account
     User user = getUser(accountId);
@@ -377,9 +412,14 @@ public class TMUberSystemManager {
   }
 
 
-  // Cancel an existing service request.
-  // parameter zone is the index in the serviceRequests array of queues
-  // parameter request is the index 
+  /**
+   * Mutator method that cancels an existing service request.
+   * Paramater zone is the index in the service requests array of queues.
+   * Parameter request is the index.
+   * 
+   * @param zone (int)
+   * @param request (int)
+   */
   public void cancelServiceRequest(int zone, int request) {
     // Check if valid zone #
     if (zone < 0 || zone > 3) {
@@ -390,12 +430,10 @@ public class TMUberSystemManager {
     if (zoneRequests.isEmpty()) {
       throw new NoServiceRequestException("No service request");
     }
-
     // Check if valid request #
     if (request < 1 || request > zoneRequests.size()) {
       throw new InvalidRequestException("Invalid request number");
     }
-
     // Loop through zone requests and remove specified request #
     Iterator<TMUberService> iterator = zoneRequests.iterator();
     for (int i = 1; i < request; i++) {
@@ -405,11 +443,15 @@ public class TMUberSystemManager {
   }
 
 
-  // Pickup method takes in driverId as parameter and takes service object and removes it from queue 
+  /**
+   * Pickup mutator method that takes in driver ID as parameter.
+   * Takes service object and removes it from queue.
+   * 
+   * @param driverId (String)
+   */
   public void pickup(String driverId) {
     // Initialize a driver variable to null
     Driver myDriver = null;
-
     // Loop through drivers
     for (Driver driver: drivers) {
       // If driver id equals our method parameter, set local variable to driver
@@ -418,21 +460,17 @@ public class TMUberSystemManager {
         break;
       }
     }
-
     // Check if our driver variable is still null and if so, throw exception
     if (myDriver == null) {
       throw new DriverNotFoundException("Driver not found");
     }
-    
     // Driver zone found through driver address
     int zone = CityMap.getCityZone(myDriver.getAddress());
     Queue<TMUberService> queue = serviceRequests[zone];
-
     // Check if queue is empty
     if (queue.isEmpty()) {
       throw new NoServiceRequestException("No Service Request in Zone " + zone);
     }
-
     // TMUberService object removed from front of queue
     TMUberService service = queue.poll();
     myDriver.setService(service);
@@ -442,10 +480,13 @@ public class TMUberSystemManager {
   }
 
 
-  // Drop off a ride or a delivery. This completes a service.
-  // parameter driverId is the given driver id
+  /**
+   * Mutator method that drops off a ride or delivery. This completes a service.
+   * Parameter driverId is the given driver ID.
+   * 
+   * @param driverId (String)
+   */
   public void dropOff(String driverId) {
-    
     // Use the given driver id to find the Driver object
     Driver driver = null;
     // Loop through drivers until driver id equals method parameter and driver is driving
@@ -455,18 +496,14 @@ public class TMUberSystemManager {
         break;
       }
     }
-
     if (driver == null) {
       throw new DriverNotFoundException("Driver not found");
     }
-
     TMUberService service = driver.getService();
     if (service == null) {
       throw new NoServiceRequestException("No service request");
     }
-
     totalRevenue += service.getCost(); // add service cost to revenues
-
     driver.pay(service.getCost() * PAYRATE); // pay the driver
     totalRevenue -= service.getCost() * PAYRATE; // deduct driver fee from total revenues
     driver.setStatus(Driver.Status.AVAILABLE); // driver is now available again
@@ -479,23 +516,25 @@ public class TMUberSystemManager {
   }
 
 
-  // driveTo method takes in a driverId and address
-  // Driver drives to address
+  /**
+   * driveTo mutator method takes in a driverId and address.
+   * Driver drives to address.
+   * 
+   * @param driverId (String)
+   * @param address (String)
+   */
   public void driveTo(String driverId, String address) {
     Driver myDriver = null;
-
     // Check for valid address
     if (!CityMap.validAddress(address)) {
       throw new InvalidAddressException("Invalid address");
     }
-
     // Check for driver that has same driverId as parameter
     for (Driver driver: drivers) {
       if (driver.getId().equals(driverId) && driver.getStatus() == Driver.Status.AVAILABLE) {
         myDriver = driver;
       }
     }
-
     // Check if our driver variable is null and throw exception
     if (myDriver == null) {
       throw new DriverNotFoundException("Driver not found");
@@ -506,7 +545,9 @@ public class TMUberSystemManager {
   }
 
 
-  // Sort users by name
+  /**
+   * Mutator method that sorts users by name.
+   */
   public void sortByUserName() {
     // Loop through the users map and add each value item to array list userList
     for (String userid: users.keySet()) {
@@ -519,6 +560,10 @@ public class TMUberSystemManager {
   }
 
 
+  /**
+   * This private class implements Comparator for data type User.
+   * Used for sortByUserName() method.
+   */
   private class NameComparator implements Comparator<User> {
     public int compare(User a, User b) {
       return a.getName().compareTo(b.getName());
@@ -526,7 +571,9 @@ public class TMUberSystemManager {
   }
 
 
-  // Sort users by number amount in wallet
+  /**
+   * Mutator method that sorts users by amount in wallet.
+   */
   public void sortByWallet() {
     // Loop through the users map and add each value item to array list userList
     for (String userid: users.keySet()) {
@@ -539,6 +586,10 @@ public class TMUberSystemManager {
   }
 
 
+  /**
+   * This private class implements Comparator for data type user.
+   * Used for sortByWallet() method.
+   */
   private class UserWalletComparator implements Comparator<User> {
     public int compare(User a, User b) {
       if (a.getWallet() > b.getWallet())
@@ -550,7 +601,11 @@ public class TMUberSystemManager {
   }
 
 
-  // Adds key and value pairs to map
+  /**
+   * Mutator method that adds key and value pairs to Linked HashMap of users.
+   * 
+   * @param userList (ArrayList<User>)
+   */
   public void setUsers(ArrayList<User> userList) {
     // Loop through userList
     for (User user: userList) {
@@ -560,13 +615,21 @@ public class TMUberSystemManager {
   }
 
 
-  // Sets all drivers
+  /**
+   * Mutator method that sets all drivers in drivers ArrayList.
+   * 
+   * @param drivers (ArrayList<Driver>)
+   */
   public void setDrivers(ArrayList<Driver> drivers) {
     this.drivers = drivers;
   }
 }
 
 
+/**
+ * Custom exception class InvalidNameException.
+ * Exception is thrown when invalid names are used in declaration.
+ */
 class InvalidNameException extends RuntimeException {
   public InvalidNameException() {}
   public InvalidNameException(String message) {
@@ -575,6 +638,10 @@ class InvalidNameException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class InvalidAddressException.
+ * Exception is thrown when invalid addresses are used in declaration.
+ */
 class InvalidAddressException extends RuntimeException {
   public InvalidAddressException() {}
   public InvalidAddressException(String message) {
@@ -583,6 +650,10 @@ class InvalidAddressException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class InvalidUserWalletException.
+ * Exception is thrown when invalid user wallet amounts are used in declaration.
+ */
 class InvalidUserWalletException extends RuntimeException {
   public InvalidUserWalletException() {}
   public InvalidUserWalletException(String message) {
@@ -590,6 +661,11 @@ class InvalidUserWalletException extends RuntimeException {
   }
 }
 
+
+/**
+ * Custom exception class UserExistsException.
+ * Exception is thrown when user already exists in user declaration.
+ */
 class UserExistsException extends RuntimeException {
   public UserExistsException() {}
   public UserExistsException(String message) {
@@ -598,6 +674,10 @@ class UserExistsException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class InvalidCarModelException.
+ * Exception is thrown when invalid car models are used in declaration.
+ */
 class InvalidCarModelException extends RuntimeException {
   public InvalidCarModelException() {}
   public InvalidCarModelException(String message) {
@@ -606,6 +686,10 @@ class InvalidCarModelException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class InvalidLicensePlateException.
+ * Exception is thrown when invalid license plates are used in declaration.
+ */
 class InvalidLicensePlateException extends RuntimeException {
   public InvalidLicensePlateException() {}
   public InvalidLicensePlateException(String message) {
@@ -614,6 +698,10 @@ class InvalidLicensePlateException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class DriverExistsException.
+ * Exception is thrown when driver already exists in driver declaration.
+ */
 class DriverExistsException extends RuntimeException {
   public DriverExistsException() {}
   public DriverExistsException(String message) {
@@ -622,7 +710,10 @@ class DriverExistsException extends RuntimeException {
 }
 
 
-
+/**
+ * Custom exception class UserNotFoundException.
+ * Exception is thrown when user is not found in search for user.
+ */
 class UserNotFoundException extends RuntimeException {
   public UserNotFoundException() {}
   public UserNotFoundException(String message) {
@@ -631,6 +722,10 @@ class UserNotFoundException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class InsufficientDistanceException.
+ * Exception is thrown when user is too close to destination or restaurant.
+ */
 class InsufficientDistanceException extends RuntimeException {
   public InsufficientDistanceException() {}
   public InsufficientDistanceException(String message) {
@@ -639,6 +734,10 @@ class InsufficientDistanceException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class InsufficientFundsException.
+ * Exception is thrown when user has insufficient funds in wallet declaration.
+ */
 class InsufficientFundsException extends RuntimeException {
   public InsufficientFundsException() {}
   public InsufficientFundsException(String message) {
@@ -647,6 +746,10 @@ class InsufficientFundsException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class DriverNotFoundException.
+ * Exception is thrown when driver is not found in search for driver.
+ */
 class DriverNotFoundException extends RuntimeException {
   public DriverNotFoundException() {}
   public DriverNotFoundException(String message) {
@@ -655,6 +758,10 @@ class DriverNotFoundException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class ExistingRideRequestException.
+ * Exception is thrown when ride request already exists in ride request declaration.
+ */
 class ExistingRideRequestException extends RuntimeException {
   public ExistingRideRequestException() {}
   public ExistingRideRequestException(String message) {
@@ -663,6 +770,10 @@ class ExistingRideRequestException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class ExistingDeliveryRequestException.
+ * Exception is thrown when delivery request already exists in delivery request declaration.
+ */
 class ExistingDeliveryRequestException extends RuntimeException {
   public ExistingDeliveryRequestException() {}
   public ExistingDeliveryRequestException(String message) {
@@ -671,6 +782,10 @@ class ExistingDeliveryRequestException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class InvalidZoneException.
+ * Exception is thrown when zone is invalid in request declaration.
+ */
 class InvalidZoneException extends RuntimeException {
   public InvalidZoneException() {}
   public InvalidZoneException(String message) {
@@ -679,6 +794,10 @@ class InvalidZoneException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class NoServiceRequestException.
+ * Exception is thrown when there is no service in declaration.
+ */
 class NoServiceRequestException extends RuntimeException {
   public NoServiceRequestException() {}
   public NoServiceRequestException(String message) {
@@ -687,6 +806,10 @@ class NoServiceRequestException extends RuntimeException {
 }
 
 
+/**
+ * Custom exception class InvalidRequestException.
+ * Exception is thrown when request is invalid.
+ */
 class InvalidRequestException extends RuntimeException {
   public InvalidRequestException() {}
   public InvalidRequestException(String message) {
