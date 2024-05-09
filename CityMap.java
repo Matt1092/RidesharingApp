@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 
 /**
+ *
  * This CityMap class represents the logic for the address, block and zone functions.
  * The city consists of a grid of 9 X 9 City Blocks. Streets are west-east (1st street to 9th street).
  * Avenues are south-north (1st avenue to 9th avenue).
@@ -23,6 +24,7 @@ import java.util.Scanner;
  *
  * @author Matthew Moga
  * @version April 12, 2024
+ *
  */
 public class CityMap
 {
