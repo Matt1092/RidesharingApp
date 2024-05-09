@@ -1,5 +1,13 @@
-// NAME: MATTHEW MOGA
-// STUDENT NUMBER: 501253529
+/**
+ * This class is a simulation of a Simple Command-line based Uber App.
+ * This system supports "ride sharing" service and a delivery service.
+ *
+ * @author Matthew Moga
+ * @version April 12, 2024
+ */
+
+
+// Import statements
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,14 +16,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-// Simulation of a Simple Command-line based Uber App 
-
-// This system supports "ride sharing" service and a delivery service
 
 public class TMUberUI {
   public static void main(String[] args) {
     // Create the System Manager - the main system code is in here
-
     TMUberSystemManager tmuber = new TMUberSystemManager();
 
     Scanner scanner = new Scanner(System.in);
@@ -25,7 +29,7 @@ public class TMUberUI {
     while (scanner.hasNextLine()) {
       String action = scanner.nextLine();
 
-      // Put all the comamnds into a try statement
+      // Put all the commands into a try statement
       try {
         if (action == null || action.equals("")) {
           System.out.print("\n>");
