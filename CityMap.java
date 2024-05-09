@@ -1,31 +1,29 @@
-// NAME: MATTHEW MOGA
-// STUDENT NUMBER: 501253529
+// Import statements
 import java.util.Arrays;
 import java.util.Scanner;
 
 
-// The city consists of a grid of 9 X 9 City Blocks
-
-// Streets are west-east (1st street to 9th street)
-// Avenues are south-north (1st avenue to 9th avenue)
-
-// Example 1 of Interpreting an address:  "34 4th Street"
-// A valid address always has 3 parts.
-// Part 1: Street/Avenue residence numbers are always 2 digits (e.g. 34).
-// Part 2: Must be 'n'th or 1st or 2nd or 3rd (e.g. n = 4)
-// Part 3: Must be "Street" or "Avenue" (case insensitive)
-
-// Use the first digit of the residence number (e.g. 3 of the number 34) to determine the avenue.
-// For distance calculation you need to identify the the specific city block - in this example 
-// it is city block (3, 4) (3rd avenue and 4th street)
-
-// Example 2 of Interpreting an address:  "51 7th Avenue"
-// Use the first digit of the residence number (i.e. 5 of the number 51) to determine street.
-// For distance calculation you need to identify the the specific city block - 
-// in this example it is city block (7, 5) (7th avenue and 5th street)
-//
-// Distance in city blocks between (3, 4) and (7, 5) is then == 5 city blocks
-
+/**
+ * This CityMap class represents the logic for the address, block and zone functions.
+ * The city consists of a grid of 9 X 9 City Blocks. Streets are west-east (1st street to 9th street).
+ * Avenues are south-north (1st avenue to 9th avenue).
+ * Example 1 of Interpreting an address:  "34 4th Street"
+ * A valid address always has 3 parts.
+ * Part 1: Street/Avenue residence numbers are always 2 digits (e.g. 34).
+ * Part 2: Must be 'n'th or 1st or 2nd or 3rd (e.g. n = 4)
+ * Part 3: Must be "Street" or "Avenue" (case insensitive)
+ * Use the first digit of the residence number (e.g. 3 of the number 34) to determine the avenue.
+ * For distance calculation you need to identify the the specific city block - in this example 
+ * It is city block (3, 4) (3rd avenue and 4th street).
+ * Example 2 of Interpreting an address:  "51 7th Avenue"
+ * Use the first digit of the residence number (i.e. 5 of the number 51) to determine street.
+ * For distance calculation you need to identify the the specific city block - 
+ * in this example it is city block (7, 5) (7th avenue and 5th street)
+ * Distance in city blocks between (3, 4) and (7, 5) is then == 5 city blocks.
+ *
+ * @author Matthew Moga
+ * @version April 12, 2024
+ */
 public class CityMap
 {
   // Checks for string consisting of all digits
@@ -39,25 +37,27 @@ public class CityMap
   }
 
 
-  // Get all parts of address string
-  // An easier solution would use String method split()
+  /**
+   * This method gets all parts of address string.
+   * 
+   * @param address (String)
+   * 
+   * @return String[] - String Array of all 3 address parts
+   */
   private static String[] getParts(String address)
   {
     String parts[] = new String[3];
-    
     if (address == null || address.length() == 0)
     {
       parts = new String[0];
       return parts;
     }
-         
     int numParts = 0;
     Scanner sc = new Scanner(address);
     while (sc.hasNext())
     {
       if (numParts >= 3)
         parts = Arrays.copyOf(parts, parts.length+1);
-
       parts[numParts] = sc.next();
       numParts++;
     }
@@ -69,43 +69,39 @@ public class CityMap
   }
 
 
-  // Checks for a valid address
+  /**
+   * Method checks for a valid address.
+   * 
+   * @param address (String)
+   * 
+   * @return boolean - true or false depending on validity of address
+   */
   public static boolean validAddress(String address)
   {
     int[] block = {-1, -1};
-
-    //String[] parts = address.split(" ");
     String[] parts = getParts(address);
-    
     if (parts.length != 3)
       return false;
-    
     boolean streetType = false; 
-    
     // "street" or "avenue" check
     if (!parts[2].equalsIgnoreCase("street") && !parts[2].equalsIgnoreCase("avenue"))
       return false;
     // which is it?
     if (parts[2].equalsIgnoreCase("street"))
       streetType = true;
-
     // All digits and digit count == 2
     if (!allDigits(parts[0]) || parts[0].length() != 2)
       return false;
-
     // Get first digit of street number
     int num1 = Integer.parseInt(parts[0])/10;
     if (num1 == 0) return false;
-   
     // Must be 'n'th or 1st or 2nd or 3rd
     String suffix = parts[1].substring(1);
     if (parts[1].length() != 3) 
       return false;
-   
     if (!suffix.equals("th") && !parts[1].equals("1st") &&
         !parts[1].equals("2nd") && !parts[1].equals("3rd"))
       return false;
-
     String digitStr = parts[1].substring(0, 1);
     if (!allDigits(digitStr))
       return false;
@@ -126,18 +122,20 @@ public class CityMap
   }
 
 
-  // Computes the city block from address string
+  /**
+   * Method computes the city block from address string.
+   * 
+   * @param address (String)
+   * 
+   * @return int[] - Integer array of city block representation 
+   */
   public static int[] getCityBlock(String address)
   {
     int[] block = {-1, -1};
     boolean streetType = false; 
-
-    //String[] parts = address.split(" ");
     String[] parts = getParts(address);
-
     if (parts[2].equalsIgnoreCase("street"))
       streetType = true;
-
     // Get first digit of street number
     int num1 = Integer.parseInt(parts[0])/10;
     int num2 = Integer.parseInt(parts[1].substring(0, 1));
@@ -157,7 +155,14 @@ public class CityMap
   }
   
 
-  // Calculates the distance in city blocks between from address and to address
+  /**
+   * Method calculates the distance in city blocks between from address and to address.
+   * 
+   * @param from (String)
+   * @param to (String)
+   * 
+   * @return int - distance between from and to addresses
+   */
   public static int getDistance(String from, String to)
   {
     int[] fromblock = {0, 0};
@@ -172,12 +177,17 @@ public class CityMap
   }
 
   
-  // Returns the zone given a valid address
+  /**
+   * Method returns the zone given a valid address.
+   * 
+   * @param address (String)
+   * 
+   * @return int - city zone
+   */
   public static int getCityZone(String address) {
     // Check if address is valid
     if (validAddress(address)) {
       int[] block = getCityBlock(address);
-
       // Gets zone for valid address
       if ((block[0] >= 1 && block[0] <= 5) && (block[1] >= 6 && block[1] <= 9)) {
         return 0;
@@ -192,7 +202,6 @@ public class CityMap
         return 3;
       }
     }
-
     // Return -1 if address is invalid
     return -1;
   }
