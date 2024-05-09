@@ -1,19 +1,30 @@
-// NAME: MATTHEW MOGA
-// STUDENT NUMBER: 501253529
-/*
+/**
  * 
- * This class simulates a food delivery service for a simple Uber app
+ * This class simulates a food delivery service for a simple Uber app.
+ * A TMUberDelivery is-a TMUberService with some extra functionality.
  * 
- * A TMUberDelivery is-a TMUberService with some extra functionality
+ * @author Matthew Moga
+ * @version April 12, 2024
+ * 
  */
 public class TMUberDelivery extends TMUberService
 {
   public static final String TYPENAME = "DELIVERY";
- 
   private String restaurant; 
   private String foodOrderId;
-  // All references to Driver object are removed
-  // Driver driver removed from argument to constructor 
+
+
+  /**
+   * This constructor initializes all instance variables in class.
+   * 
+   * @param from (String)
+   * @param to (String)
+   * @param user (User)
+   * @param distance (int)
+   * @param cost (double)
+   * @param restaurant (String)
+   * @param order (String)
+   */
   public TMUberDelivery(String from, String to, User user, int distance, double cost,
                         String restaurant, String order)
   {
@@ -23,33 +34,68 @@ public class TMUberDelivery extends TMUberService
   }
  
   
+  /**
+   * Accessor returns service type.
+   * 
+   * @return String - service type
+   */
   public String getServiceType()
   {
     return TYPENAME;
   }
   
+
+  /**
+   * Accessor returns restaurant.
+   * 
+   * @return String - restaurant
+   */
   public String getRestaurant()
   {
     return restaurant;
   }
 
+
+  /**
+   * Mutator method sets restaurant.
+   * 
+   * @param restaurant (String)
+   */
   public void setRestaurant(String restaurant)
   {
     this.restaurant = restaurant;
   }
 
+
+  /**
+   * Accessor returns food order ID.
+   * 
+   * @return String - food order ID
+   */
   public String getFoodOrderId()
   {
     return foodOrderId;
   }
 
+
+  /**
+   * Mutator method sets food order ID.
+   * 
+   * @param foodOrderId (String)
+   */
   public void setFoodOrderId(String foodOrderId)
   {
     this.foodOrderId = foodOrderId;
   }
-  /*
-   * Two Delivery Requests are equal if they are equal in terms of TMUberServiceRequest
-   * and restaurant and food order id
+
+
+  /**
+   * Method checks if two delivery requests are equal.
+   * Equal if hey are equal in terms of TMUberServiceRequest, restaurant and food order id.
+   * 
+   * @param other (Object)
+   * 
+   * @return boolean - true or false depending on checks
    */
   public boolean equals(Object other)
   {
@@ -59,14 +105,15 @@ public class TMUberDelivery extends TMUberService
     TMUberService req = (TMUberService)other;
     if (!req.getServiceType().equals(TMUberDelivery.TYPENAME))
       return false;
-    
     // Now check if this delivery and other delivery are equal
     TMUberDelivery delivery = (TMUberDelivery)other;
     return super.equals(other) && delivery.getRestaurant().equals(restaurant) && 
                                   delivery.getFoodOrderId().equals(foodOrderId);
   }
-  /*
-   * Print Information about a Delivery Request
+
+
+  /**
+   * Mutator method prints information about a delivery request
    */
   public void printInfo()
   {
