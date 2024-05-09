@@ -1,12 +1,3 @@
-/**
- * This class is a simulation of a Simple Command-line based Uber App.
- * This system supports "ride sharing" service and a delivery service.
- *
- * @author Matthew Moga
- * @version April 12, 2024
- */
-
-
 // Import statements
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,6 +8,13 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 
+/**
+ * This class is a simulation of a Simple Command-line based Uber App.
+ * This system supports "ride sharing" service and a delivery service.
+ *
+ * @author Matthew Moga
+ * @version April 12, 2024
+ */
 public class TMUberUI {
   /**
     * This method defines the mainline logic for our Uber loop. 
