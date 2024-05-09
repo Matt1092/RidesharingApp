@@ -18,6 +18,12 @@ import java.util.StringTokenizer;
 
 
 public class TMUberUI {
+  /**
+    * This method defines the mainline logic for our Uber loop. 
+    * It uses a SystemManager object and various helper methods to run the app.
+    * 
+    * @param args (String[])
+    */
   public static void main(String[] args) {
     // Create the System Manager - the main system code is in here
     TMUberSystemManager tmuber = new TMUberSystemManager();
