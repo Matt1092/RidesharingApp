@@ -1,5 +1,4 @@
-// NAME: MATTHEW MOGA
-// STUDENT NUMBER: 501253529
+// Import statements
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,11 +11,14 @@ import java.lang.RuntimeException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-/*
+
+/**
  * 
  * This class contains the main logic of the system.
+ *  It keeps track of all users, drivers and service requests (RIDE or DELIVERY).
  * 
- *  It keeps track of all users, drivers and service requests (RIDE or DELIVERY)
+ * @author Matthew Moga
+ * @version April 12, 2024
  * 
  */
 public class TMUberSystemManager {
@@ -47,6 +49,9 @@ public class TMUberSystemManager {
   int driverId = 700;
 
 
+  /**
+   * This no-argument constructor initializes all the instance variables of the class.
+   */
   public TMUberSystemManager() {
     users = new LinkedHashMap<>();
     userList = new ArrayList<User>();
@@ -60,20 +65,35 @@ public class TMUberSystemManager {
   }
 
 
-  // Generate a new user account id
+  /**
+   * This method generates a new user account ID.
+   * 
+   * @return String - Display of user's account ID
+   */
   private String generateUserAccountId() {
     return "" + userAccountId + users.size();
   }
 
 
-  // Generate a new driver id
+  /**
+   * This method generates a new driver ID.
+   * 
+   * @return String - Display of driver's ID
+   */
   private String generateDriverId() {
     return "" + driverId + drivers.size();
   }
 
 
-  // Given user account id, find user in list of users
-  // Method modified for Linked HashMap implementation
+  /**
+   * Given user account ID, this accessor finds user in list of users.
+   * Method is modified for Linked HashMap implementation.
+   * 
+   * @param accountId (String)
+   * 
+   * @return User - Returns user if found amongst list of users
+   * @return null - If user not found
+   */
   public User getUser(String accountId) {
     for (String userId: users.keySet()) {
       if (userId.equals(accountId)) {
@@ -84,19 +104,28 @@ public class TMUberSystemManager {
   }
 
 
-  // Check for duplicate user
-  // Method modified for Linked HashMap implementation
+  /**
+   * This method checks for duplicate user.
+   * Method is modified for Linked HashMap implementation.
+   * 
+   * @param user (User)
+   * 
+   * @return boolean - Whether or not users contains user
+   */
   private boolean userExists(User user) {
     // Simple way for Linked HashMap implementation
-    // return users.containsValue(user);
     return users.containsValue(user);
   }
 
 
-  // Check for duplicate driver
+  /**
+   * This method checks for duplicate driver.
+   * 
+   * @param driver (Driver)
+   * 
+   * @return boolean - Whether or not drivers contains driver
+   */
   private boolean driverExists(Driver driver) {
-    // simple way
-    // return drivers.contains(driver);
     for (int i = 0; i < drivers.size(); i++) {
       if (drivers.get(i).equals(driver))
         return true;
@@ -105,10 +134,14 @@ public class TMUberSystemManager {
   }
 
 
-  // Given a user, check if user ride/delivery request already exists in serviceRequests
+  /**
+   * Given a user, this method checks if user ride/delivery request already exists in service requests.
+   * 
+   * @param req (TMUberService)
+   * 
+   * @return boolean - Whether or not ride/delivery request exists
+   */
   private boolean existingRequest(TMUberService req) {
-    // Simple way
-    // return serviceRequests.contains(req);
     for (Queue<TMUberService> zoneService: serviceRequests) {
     if (zoneService.contains(req)) 
       return true;
@@ -117,17 +150,31 @@ public class TMUberSystemManager {
   }
 
 
-  // Calculate the cost of a ride or of a delivery based on distance
+  /**
+   * This accessor returns the delivery cost based on distance.
+   * 
+   * @param distance (int)
+   * 
+   * @return int - Distance multiplied by delivery rate
+   */
   private double getDeliveryCost(int distance) {
     return distance * DELIVERYRATE;
   }
 
 
+  /**
+   * This accessor returns the ride cost based on distance.
+   * 
+   * @param distance (int)
+   * 
+   * @return int - Distance multiplied by ride rate
+   */
   private double getRideCost(int distance) {
     return distance * RIDERATE;
   }
 
 
+  
   // Go through all drivers and see if one is available
   // Choose the first available driver
   private Driver getAvailableDriver() {
