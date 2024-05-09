@@ -1,8 +1,10 @@
 /**
+ *
  * This class simulates a user of a simple Uber app.
  *
  * @author Matthew Moga
  * @version April 12, 2024
+ *
  */
 public class User {
   private String accountId;
