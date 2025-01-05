@@ -20,12 +20,10 @@ This project is a simulation of a simple Uber-like application developed as part
    ```sh
    git clone https://github.com/Matt1092/RidesharingApp.git
    ```
-
 2. Navigate to the project directory:
   ```sh
   cd RidesharingApp
   ```
-
 3. Compile the Java files:
    ```sh
   javac *.java
