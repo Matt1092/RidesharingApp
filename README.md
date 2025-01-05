@@ -22,7 +22,7 @@ This project is a simulation of a simple Uber-like application developed as part
    ```
 2. Navigate to the project directory:
    ```sh
-   javac *.java
+   cd RidesharingApp
    ```
 3. Compile the Java files:
    ```sh
