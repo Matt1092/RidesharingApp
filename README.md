@@ -1,11 +1,34 @@
-# Uber
-What works:
-My program compiles. The TMUberUI runs without any bugs or errors.
-A warning pops up when I compile the TMUberUI the first time but it compiles and runs smoothly after the 2nd compilation. I was advised by the professor to ignore this "Recompile with -Xlint:unchecked for details." It isn't an error, but rather a warning. My code compiles and the TMUberUI is able to run.
+# RidesharingApp
 
-My program is able to load in users.txt and drivers.txt files and has the necessary exception handling for loading in other files.
-I have several different customized exceptions such as InvalidNameException, DriverNotFoundException, NoServiceRequestException, etc. These are thrown in TMUberSystemManager and caught in TMUberUI in a large try-catch statement.
+This project is a simulation of a simple Uber-like application developed as part of a university project. It includes various functionalities such as ride-sharing and food delivery services, implemented using different data structures to represent service requests and drivers.
 
-I have a serviceRequests array of 4 queues that can add and remove the service requests from each zone queue. My pickup functionality works.
-I implemented a Linked HashMap for User objects. I completed the sort methods will the help of a userList arrayList instance variable. By looping through the HashMap and adding each value item to the userList, I was able to sort the userList depending on wallet or name, clear the users HashMap and then set the users to the sorted userList.
-TMUberSystemManager has the necessary changes and modifications to the program.
+## Features
+
+- **CityMap**: Represents the logic for the address, block, and zone functions within a 9x9 grid of city blocks.
+- **Driver**: Simulates a car driver with attributes like ID, name, car model, license plate, address, and status.
+- **TMUberDelivery**: Simulates a food delivery service with attributes for restaurant and food order ID.
+- **TMUberRegistered**: Registers all drivers and users through file input.
+- **TMUberRide**: Simulates a ride service with attributes for number of passengers and whether an XL ride is requested.
+- **TMUberService**: Abstract class that generalizes ride or delivery services.
+- **TMUberSystemManager**: Contains the main logic of the system, tracking users, drivers, and service requests.
+- **TMUberUI**: Command-line interface for interacting with the system.
+- **User**: Simulates a user with attributes like account ID, name, address, wallet, rides, and deliveries.
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Matt1092/RidesharingApp.git
+   ```
+
+2. Navigate to the project directory:
+  ```sh
+  cd RidesharingApp
+  ```
+
+3. Compile the Java files:
+   ```sh
+  javac *.java
+  ```
+
+## Usage
