@@ -37,10 +37,10 @@ This project is a simulation of a simple Uber-like application developed as part
    ```
 2. Use the following commands to interact with the application:
 
-    `DRIVERS`: List all registered drivers.
-    `USERS`: List all registered users.
-    `REQUESTS`: List all current ride or delivery requests.
-    `PICKUP`: Pickup a ride or delivery by driver ID.
+    + `DRIVERS`: List all registered drivers.
+    + `USERS`: List all registered users.
+    + `REQUESTS`: List all current ride or delivery requests.
+    + `PICKUP`: Pickup a ride or delivery by driver ID.
     `LOADUSERS`: Load users from a file.
     `LOADDRIVERS`: Load drivers from a file.
     `DRIVETO`: Drive to a specified address by driver ID.
