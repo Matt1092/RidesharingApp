@@ -81,17 +81,9 @@ Here is an example of how to use the application:
    User Account Id: 9000
    From Address: 34 4th Street
    To Address: 51 7th Avenue
-   ```
-4. Pickup the ride:
-   ```text
-   > PICKUP
-   Driver Id: 7000
-   ```
-5. Drop off the ride:
-   ```text
-   > DROPOFF
-   Driver Id: 7000
+   RIDE for: John Doe    From: 34 4th Street    To: 51 7th Avenue
    ```
 
+
 ## License
-This project is licensed under a custom license. Unauthorized use, modification, copying, or distribution of this code is prohibited. This code is intended solely for educational purposes within the context of [Toronto Metropolitan University]. Any use of this code must comply with the academic integrity policies of [Your University Name].
+This project is licensed under a custom license. Unauthorized use, modification, copying, or distribution of this code is prohibited. This code is intended solely for educational purposes within the context of Toronto Metropolitan University. Any use of this code must comply with the academic integrity policies of Toronto Metropolitan University.
