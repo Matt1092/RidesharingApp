@@ -59,14 +59,14 @@ This project is a simulation of a simple Uber-like application developed as part
 ## Example
 Here is an example of how to use the application:
 1. Register a new user:
-   ```sh
+   ```text
    > REGUSER
    Name: John Doe
    Address: 34 4th Street
    Wallet: 50.00
    ```
 2. Register a new driver:
-   ```sh
+   ```text
    > REGDRIVER
    Name: Jane Smith
    Car Model: Toyota Prius
@@ -74,19 +74,19 @@ Here is an example of how to use the application:
    Address: 51 7th Avenue
    ```
 3. Request a ride:
-   ```sh
+   ```text
    > REQRIDE
    User Account Id: 9000
    From Address: 34 4th Street
    To Address: 51 7th Avenue
    ```
 4. Pickup the ride:
-   ```sh
+   ```text
    > PICKUP
    Driver Id: 7000
    ```
 5. Drop off the ride:
-   ```sh
+   ```text
    > DROPOFF
    Driver Id: 7000
 
