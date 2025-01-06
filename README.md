@@ -92,4 +92,4 @@ Here is an example of how to use the application:
    ```
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under a custom license. Unauthorized use, modification, copying, or distribution of this code is prohibited. This code is intended solely for educational purposes within the context of [Toronto Metropolitan University]. Any use of this code must comply with the academic integrity policies of [Your University Name].
