@@ -36,7 +36,6 @@ This project is a simulation of a simple Uber-like application developed as part
    java TMUberUI
    ```
 2. Use the following commands to interact with the application:
-
     + `DRIVERS`: List all registered drivers.
     + `USERS`: List all registered users.
     + `REQUESTS`: List all current ride or delivery requests.
