@@ -73,6 +73,7 @@ Here is an example of how to use the application:
    Car Model: Toyota Prius
    Car License: ABC123
    Address: 51 7th Avenue
+   Driver: Jane Smith    Car Model: Toyota Prius    License Plate: ABC123
    ```
 3. Request a ride:
    ```text
