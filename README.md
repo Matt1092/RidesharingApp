@@ -64,6 +64,7 @@ Here is an example of how to use the application:
    Name: John Doe
    Address: 34 4th Street
    Wallet: 50.00
+   User: John Doe    Address: 34 4th Street    Wallet: 50.00
    ```
 2. Register a new driver:
    ```text
